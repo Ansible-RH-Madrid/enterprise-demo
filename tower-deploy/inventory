@@ -1,0 +1,27 @@
+[tower]
+towercluster1.labmad.redhat.com
+towercluster2.labmad.redhat.com
+towercluster3.labmad.redhat.com
+
+[database]
+towerclusterdb.labmad.redhat.com
+
+[all:vars]
+admin_password='xxxxxxx'
+
+pg_host='towerclusterdb.labmad.redhat.com'
+pg_port='5432'
+
+pg_database='awx'
+pg_username='awx'
+pg_password='xxxxxxx'
+
+rabbitmq_port=5672
+rabbitmq_vhost=tower
+rabbitmq_username=tower
+rabbitmq_password='xxxxxxx'
+rabbitmq_cookie=cookiemonster
+
+# Isolated Tower nodes automatically generate an RSA key for authentication;
+# To disable this behavior, set this value to false
+# isolated_key_generation=true
