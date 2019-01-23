@@ -1,0 +1,34 @@
+---
+
+#- include: add_rule_sg.yml
+
+- include: create_ec2.yml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,9 @@
+---
+
+- name: "[ENTERPRISE-DEMO][AWS][CONFIG-JBOSS] Configure JBOSS standalone in the ec2 server"
+  hosts: all
+  remote_user: "{{ ec2_remote_user }}"
+  become: yes
+  roles:
+#    - { role: jboss-standalone }
+    - { role: java-app }

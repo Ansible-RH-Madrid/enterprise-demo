@@ -21,12 +21,20 @@
     creates: /usr/share/jboss-as
     copy: no
 
-  # Rename the dir to avoid encoding the version in the init script
+# Rename the dir to avoid encoding the version in the init script
 - name: Rename install directory
-  command: /bin/mv jboss-as-7.1.1.Final jboss-as 
+  command: /bin/mv jboss-as-7.1.1.Final jboss-as
   args:
-    chdir: /usr/share 
+    chdir: /usr/share
     creates: /usr/share/jboss-as
+
+# Due to a jboss bug, use the jobss module jar with higher version instead
+# that fixes this failure
+- name: Upgrade the jboss modules jar
+  get_url:
+    url: http://repo1.maven.org/maven2/org/jboss/modules/jboss-modules/1.1.5.GA/jboss-modules-1.1.5.GA.jar
+    dest: /usr/share/jboss-as/jboss-modules.jar
+    force: yes
 
 - name: Copying standalone.xml configuration file
   template:
