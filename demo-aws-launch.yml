@@ -1,9 +1,0 @@
----
-- name: "[DEMO][AWS] Provision AWS instances"
-  hosts: localhost
-  connection: local
-  gather_facts: False
-  vars_files:
-    - vault/aws_vault.yml
-  roles:
-    - provision-aws

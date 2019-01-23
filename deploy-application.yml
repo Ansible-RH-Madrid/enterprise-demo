@@ -10,11 +10,12 @@
   roles:
     - { role: provision-aws }
 
-- name: "[ENTERPRISE-DEMO][AWS][CONFIG-JBOSS] Configure JBOSS standalone in the ec2 server"
+- name: "[ENTERPRISE-DEMO][AWS][CONFIG-JBOSS] Configure APP in Tomcat standalone in the ec2 server"
   hosts: aws_inv
   remote_user: "{{ ec2_remote_user }}"
   become: yes
   vars_files:
     - "vault/aws_vault.yml"
   roles:
-    - { role: jboss-standalone }
+    - { role: tomcat-selinux }
+    - { role: tomcat-standalone }
