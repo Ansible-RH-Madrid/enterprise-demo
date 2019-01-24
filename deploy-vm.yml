@@ -3,6 +3,7 @@
  - name: "[ENTERPRISE-DEMO][AWS][DEPLOY-AWS] Add ec2-instance to the inv"
    hosts: localhost
    connection: local
+   gather_facts: False
    remote_user: "{{ ec2_remote_user }}"
    vars_files:
      - "vault/aws_vault.yml"
