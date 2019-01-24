@@ -1,6 +1,6 @@
 ---
 
-- name: Create an instance
+- name: Create/delete an instance
   hosts: localhost
   gather_facts: no
   connection: local
@@ -15,7 +15,7 @@
     instance_state: "present"
 
   tasks:
-    - name: create a instance
+    - name: create/delete an instance
        gce:
         instance_names: "{{ vm_name}}"
         zone: "{{ zone }}"
