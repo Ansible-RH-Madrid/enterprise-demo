@@ -1,6 +1,6 @@
 ---
 
- - name: "[ENTERPRISE-DEMO][AWS][DEPLOY-AWS] Deploy VM into {{ environment }} cloud!"
+ - name: "[ENTERPRISE-DEMO][AWS][DEPLOY-AWS] Deploy VM into {{ cloud_environment }} cloud!"
    hosts: localhost
    connection: local
    gather_facts: False
