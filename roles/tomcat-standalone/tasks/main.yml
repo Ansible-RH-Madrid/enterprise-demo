@@ -1,14 +1,14 @@
 ---
-- name: "[ENTERPRISE-DEMO][AWS][CONFIG-APP][TOMCAT-DEPLOY] Install Java 1.7"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Install Java 1.7"
   yum:
     name: java-1.7.0-openjdk
     state: present
 
-- name: "[ENTERPRISE-DEMO][AWS][CONFIG-APP][TOMCAT-DEPLOY] Add group tomcat"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Add group tomcat"
   group:
     name: tomcat
 
-- name: "[ENTERPRISE-DEMO][AWS][CONFIG-APP][TOMCAT-DEPLOY] Add user tomcat"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Add user tomcat"
   user:
     name: "tomcat"
     group: "tomcat"
@@ -17,21 +17,21 @@
   become: True
   become_method: sudo
 
-- name: "[ENTERPRISE-DEMO][AWS][CONFIG-APP][TOMCAT-DEPLOY] Download Tomcat"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Download Tomcat"
   get_url:
     url: "http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.61/bin/apache-tomcat-7.0.61.tar.gz"
     dest: "/opt/apache-tomcat-7.0.61.tar.gz"
 
-- name: "[ENTERPRISE-DEMO][AWS][CONFIG-APP][TOMCAT-DEPLOY] Extract archive"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Extract archive"
   command: chdir=/usr/share /bin/tar xvf /opt/apache-tomcat-7.0.61.tar.gz -C /opt/ creates=/opt/apache-tomcat-7.0.61
 
-- name: "[ENTERPRISE-DEMO][AWS][CONFIG-APP][TOMCAT-DEPLOY] Symlink install directory"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Symlink install directory"
   file:
     src: "/opt/apache-tomcat-7.0.61"
     path: "/usr/share/tomcat"
     state: link
 
-- name: "[ENTERPRISE-DEMO][AWS][CONFIG-APP][TOMCAT-DEPLOY] Change ownership of Tomcat installation"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Change ownership of Tomcat installation"
   file:
     path: "/usr/share/tomcat/"
     owner: tomcat
@@ -39,49 +39,49 @@
     state: directory
     recurse: yes
 
-- name: "[ENTERPRISE-DEMO][AWS][CONFIG-APP][TOMCAT-DEPLOY] Configure Tomcat server"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Configure Tomcat server"
   template:
     src: "server.xml"
     dest: "/usr/share/tomcat/conf/"
   notify: restart tomcat
 
-- name: "[ENTERPRISE-DEMO][AWS][CONFIG-APP][TOMCAT-DEPLOY] Configure Tomcat users"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Configure Tomcat users"
   template:
     src: "tomcat-users.xml"
     dest: "/usr/share/tomcat/conf/"
   notify: restart tomcat
 
-- name: "[ENTERPRISE-DEMO][AWS][CONFIG-APP][TOMCAT-DEPLOY] Install Tomcat init script"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Install Tomcat init script"
   copy:
     src: "tomcat-initscript.sh"
     dest: "/etc/init.d/tomcat"
     mode: 0755
 
-- name: "[ENTERPRISE-DEMO][AWS][CONFIG-APP][TOMCAT-DEPLOY] Start Tomcat"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Start Tomcat"
   service:
     name: tomcat
     state: started
     enabled: yes
 
-- name: "[ENTERPRISE-DEMO][AWS][CONFIG-APP][TOMCAT-DEPLOY] Wait for tomcat to start"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Wait for tomcat to start"
   wait_for:
     port: "{{http_port}}"
 
-- name: "[ENTERPRISE-DEMO][AWS][CONFIG-APP][TOMCAT-DEPLOY] Copy application WAR file to host"
-  copy:
-    src: ticket-monster.war
-    dest: /tmp
 
-- name: "[ENTERPRISE-DEMO][AWS][CONFIG-APP][TOMCAT-DEPLOY] Unzip WAR file"
-  unarchive:
-    src: "/tmp/ticket-monster.war"
-    dest: "/usr/share/tomcat/webapps/ROOT/"
-    copy: no
-    mode: 0755
-    owner: tomcat
-    group: tomcat
-  notify: restart tomcat
 
-#- name: Delete remote war file
-#  file: path={{ warRemotePath }}/{{ warName }} state=absent
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
