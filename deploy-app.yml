@@ -1,0 +1,8 @@
+---
+
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-APP] Deploy APP on top of JBOSS Server"
+  hosts: all
+  #remote_user: "{{ ec2_remote_user }}"
+  become: yes
+  roles:
+    - { role: deploy-app }
