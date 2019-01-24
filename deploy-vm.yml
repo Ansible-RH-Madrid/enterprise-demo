@@ -1,10 +1,10 @@
 ---
 
- - name: "[ENTERPRISE-DEMO][AWS][DEPLOY-AWS] Deploy VM into {{ cloud_environment }} cloud!"
+ - name: "[ENTERPRISE-DEMO][DEPLOY-VM] Deploy VM into {{ cloud_environment }} cloud!"
    hosts: localhost
    connection: local
    gather_facts: False
-   remote_user: "{{ ec2_remote_user }}"
+   #remote_user: "{{ ec2_remote_user }}"
    vars_files:
      - "vault/aws_vault.yml"
    roles:
