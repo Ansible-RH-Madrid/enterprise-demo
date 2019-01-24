@@ -1,6 +1,6 @@
 ---
 
- - name: "[ENTERPRISE-DEMO][AWS][DEPLOY-AWS] Add ec2-instance to the inv"
+ - name: "[ENTERPRISE-DEMO][AWS][DEPLOY-AWS] Deploy VM into {{ environment }} cloud!"
    hosts: localhost
    connection: local
    gather_facts: False
