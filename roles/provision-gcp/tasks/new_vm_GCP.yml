@@ -23,6 +23,7 @@
         image_family:  "{{ image }}"
         state: "{{ instance_state }}"
         service_account_email: "{{ serviceAcc_mail }}"
+        metadata: '{ "enable-oslogin" : "TRUE" }'
         credentials_file: "{{ gcp_cred_file }}"
         project_id: "{{ project }}"
         disk_size: "{{ disk_size_gb }}"
