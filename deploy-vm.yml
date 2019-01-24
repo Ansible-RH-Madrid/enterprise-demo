@@ -1,10 +1,10 @@
 ---
 
-- name: "[ENTERPRISE-DEMO][CLOUD][CONFIG-APP] Configure the application in the cloud server"
-  hosts: all
-  remote_user: "{{ ec2_remote_user }}"
-  become: yes
-  roles:
-    - { role: tomcat-selinux }
-    - { role: tomcat-standalone }
-    #- { role: java-app }
+ - name: "[ENTERPRISE-DEMO][AWS][DEPLOY-AWS] Add ec2-instance to the inv"
+   hosts: localhost
+   connection: local
+   remote_user: "{{ ec2_remote_user }}"
+   vars_files:
+     - "vault/aws_vault.yml"
+   roles:
+     - { role: provision-aws }
