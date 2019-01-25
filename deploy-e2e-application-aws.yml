@@ -10,7 +10,7 @@
   roles:
     - { role: provision-vm }
 
-- name: "[ENTERPRISE-DEMO][AWS][CONFIG-JBOSS] Configure APP in Tomcat standalone in the ec2 server"
+- name: "[ENTERPRISE-DEMO][AWS][CONFIG-JBOSS] Configure APP in JBOSS standalone in the ec2 server"
   hosts: aws_inv
   remote_user: "{{ ec2_remote_user }}"
   become: yes

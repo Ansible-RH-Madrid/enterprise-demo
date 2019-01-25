@@ -1,24 +1,20 @@
 ---
 
-#- include: add_rule_sg.yml
 
-- include: create_ec2.yml
+# Deploy VM in AWS
+- block:
+  - include: create_ec2.yml
+  when: "'{{ cloud_environment }}' == 'AWS'"
 
+# Deploy VM in GCP
+- block:
+  - include: new_vm_network_GCP.yml
+  when: "'{{ cloud_environment }}' == 'GCP'"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Deploy VM in AZURE
+- block:
+  - include: create_azure_vm.yml
+  when: "'{{ cloud_environment }}' == 'GCP'"
 
 
 
