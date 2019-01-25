@@ -1,6 +1,7 @@
 ---
 
 - name: "[ENTERPRISE-DEMO] Create configuration file (server_id.cfg) for the server"
+  delegate_to: 10.32.170.152
   file:
     path: /etc/nagios/servers/{{ new_vm_ip }}.cfg
     state: touch

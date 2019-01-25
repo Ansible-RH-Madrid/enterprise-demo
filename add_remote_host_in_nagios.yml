@@ -2,7 +2,7 @@
 
 - name: "[ENTERPRISE-DEMO] Add remote server in nagios config"
   hosts: all
-  delegate_to: 10.32.170.152
+  connection: local
   roles:
     - { role: add-vm-nagios }
 
