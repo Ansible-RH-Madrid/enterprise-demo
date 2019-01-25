@@ -1,10 +1,8 @@
 ---
+
 - name: "[ENTERPRISE-DEMO] Add remote server in nagios config"
   hosts: all
   delegate_to: 10.32.170.152
-  vars:
-    new_vm_ip: "10.32.170.159"
-    http_port: "80"
   roles:
     - { role: add-vm-nagios }
 
