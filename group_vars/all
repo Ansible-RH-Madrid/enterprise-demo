@@ -1,5 +1,5 @@
 
-# AWS specific variables
+#### AWS specific variables
 #ec2_access_key: ""
 #ec2_secret_key: ""
 ec2_region: "eu-west-1"
@@ -22,12 +22,19 @@ ec2_remote_user: "ec2-user"
 tower_user_name: admin
 
 
-# Here are variables related to the Tomcat installation
-
+#### App Server Specifics
 http_port: 8080
 https_port: 8443
 
 # This will configure a default manager-gui user:
-
 admin_username: admin
 admin_password: adminsecret
+
+#### Telegram Bot Specifics
+
+
+
+
+
+
+
