@@ -1,6 +1,5 @@
 ---
 
----
 - name: "[ENTERPRISE-DEMO][AWS][DEPLOY-INSTANCE] Add IP into Custom CMDB"
   hosts: all
   #vars:
