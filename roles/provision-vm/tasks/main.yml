@@ -6,7 +6,7 @@
   - include: create_ec2.yml
   when: "'{{ cloud_environment }}' == 'AWS'"
 
- Deploy VM in GCP
+# Deploy VM in GCP
 - block:
   - include: new_vm_network_GCP.yml
   when: "'{{ cloud_environment }}' == 'GCP'"
