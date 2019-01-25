@@ -8,7 +8,7 @@
 
 # Deploy VM in GCP
 - block:
-  - include: new_vm_network_GCP.yml
+  - include: new_vm_GCP.yml
   when: "'{{ cloud_environment }}' == 'GCP'"
 
 # Deploy VM in AZURE
