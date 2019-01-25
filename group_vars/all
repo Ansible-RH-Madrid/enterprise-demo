@@ -34,4 +34,9 @@ admin_password: adminsecret
 tokenBot: '651806613:AAEN8JKAG3-qT-Cp5O2ODBIq6qIvaVIAVTE'
 chatID: -309849244	# Ansible Demo Group
 
+#### CMDB
+cmbd_ip: "10.32.170.153"
+
+
+
 
