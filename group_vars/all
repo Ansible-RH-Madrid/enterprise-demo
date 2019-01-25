@@ -31,10 +31,7 @@ admin_username: admin
 admin_password: adminsecret
 
 #### Telegram Bot Specifics
-
-
-
-
-
+tokenBot: '651806613:AAEN8JKAG3-qT-Cp5O2ODBIq6qIvaVIAVTE'
+chatID: -309849244	# Ansible Demo Group
 
 
