@@ -5,7 +5,7 @@
    connection: local
    gather_facts: False
    #remote_user: "{{ ec2_remote_user }}"
-   vars_files:
-     - "vault/aws_vault.yml"
+   #vars_files:
+   #  - "vault/aws_vault.yml"
    roles:
      - { role: provision-vm }
