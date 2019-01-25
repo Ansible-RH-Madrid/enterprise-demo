@@ -8,4 +8,4 @@
    vars_files:
      - "vault/aws_vault.yml"
    roles:
-     - { role: provision-aws }
+     - { role: provision-vm }
