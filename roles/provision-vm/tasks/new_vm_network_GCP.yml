@@ -7,7 +7,7 @@
   vars:
     project: my-project
     gcp_cred_kind: serviceaccount
-    gcp_cred_file: 
+    gcp_cred_file:
     image: 'projects/rhel-cloud/global/images/rhel-7-v20190116'
     zone: "europe-west1-b"
     region: "europe-west1"
@@ -26,7 +26,7 @@
         source_image: "{{ image }}"
         zone: "{{ zone }}"
         project: "{{ project }}"
-        auth_kind: "{{ gcp_cred_kind }}"         
+        auth_kind: "{{ gcp_cred_kind }}"
         service_account_file: "{{ gcp_cred_file }}"
         scopes:
           - https://www.googleapis.com/auth/compute
@@ -79,4 +79,4 @@
         scopes:
           - https://www.googleapis.com/auth/compute
       register: instance
-  
+
