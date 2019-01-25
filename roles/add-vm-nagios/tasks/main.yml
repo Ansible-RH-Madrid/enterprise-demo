@@ -1,0 +1,36 @@
+---
+# tasks file for add-vm-nagios
+
+- block:
+  - include: add_vm_to_nagios.yml
+  when: monitoring == "enable"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
