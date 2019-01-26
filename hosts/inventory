@@ -1,1 +1,1 @@
-ec2-54-246-128-198.eu-west-1.compute.amazonaws.com ansible_ssh_private_key_file=../aws_keypair.pem
+localhost
