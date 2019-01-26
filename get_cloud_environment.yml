@@ -27,12 +27,13 @@
        aggregate: no
      with_items: "{{ vms.instances }}"
 
-
-
-
-
-
-
+   - name: "Register the variables II"
+     set_stats:
+       data:
+         new_vm_id: "{{ item.instance_id }}"
+       per_host: no
+       aggregate: no
+     with_items: "{{ vms.instances }}"
 
 
 

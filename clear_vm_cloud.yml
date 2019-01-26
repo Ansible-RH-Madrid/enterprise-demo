@@ -9,9 +9,8 @@
     ec2:
       access_key: "{{ ec2_access_key }}"
       secret_key: "{{ ec2_secret_key }}"
-      group: "{{ ec2_security_group }}"
       region: "{{ ec2_region }}"
-      instance_tags: "{'ansible_group':'jboss', 'type':'{{ ec2_instance_type }}', 'group':'{{ ec2_security_group }}', 'Name':'{{ ec2_instance_name }}'}"
+      instance_ids: "{{ new_vm_id }}"
       state: absent
       wait: true
     register: ec2

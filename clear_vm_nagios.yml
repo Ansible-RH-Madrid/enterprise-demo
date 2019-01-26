@@ -6,8 +6,7 @@
   tasks:
 
    - name: "Delete configuration file (server_id.cfg) for the server"
-     shell: rm -f /etc/nagios/servers/{{ item.public_dns_name }}.cfg
-     with_items: "{{ instances }}"
+     shell: rm -f /etc/nagios/servers/{{ new_vm_ip }}.cfg
 
    - name: "Restart nagios service"
      service:
