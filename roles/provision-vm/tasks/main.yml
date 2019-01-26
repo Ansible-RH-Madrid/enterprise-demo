@@ -7,9 +7,9 @@
   when: cloud_environment == "AWS"
 
 # Deploy VM in GCP
-#- block:
-#  - include: new_vm_GCP.yml
-#  when: "'{{ cloud_environment }}' == 'GCP'"
+- block:
+  - include: new_vm_GCP.yml
+  when: "'{{ cloud_environment }}' == 'GCP'"
 
 # Deploy VM in RHV
 - block:
