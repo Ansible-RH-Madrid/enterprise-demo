@@ -25,7 +25,7 @@
               use                             local-service
               host_name                       {{ new_vm_ip }}
               service_description             JBOSS_Ansible_Demo
-              check_command                   check_http_with_args!{{ http_port }}!/index.html
+              check_command                   check_http_with_args!{{ http_port }}!/
               notifications_enabled           0
               event_handler                   ansible-playbook
               check_interval                  0.5
