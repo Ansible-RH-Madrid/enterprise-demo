@@ -1,0 +1,16 @@
+---
+
+- name: "Get facts about instance in ec2"
+  ec2_instance_facts:
+    filters:
+      "tag:Name": "{{ ec2_instance_name }}"
+
+
+#- name: "Terminate ec2 instances"
+#  ec2:
+#    access_key: "{{ ec2_access_key }}"
+#    secret_key: "{{ ec2_secret_key }}"
+#    region: "{{ ec2_region }}"
+#    instance_tags: "{'ansible_group':'jboss', 'type':'{{ ec2_instance_type }}', 'group':'{{ ec2_security_group }}', 'Name':'{{ ec2_instance_name }}'}"
+#    state: "absent"
+

@@ -1,0 +1,15 @@
+---
+
+- name: "Clean nagios alarms for cloud environments"
+  hosts: all
+  connection: local
+  tasks:
+
+   - name: "Delete configuration file (server_id.cfg) for the server"
+     shell: rm -f /etc/nagios/servers/{{ item.public_dns_name }}.cfg
+     with_items: "{{ instances }}"
+
+   - name: "Restart nagios service"
+     service:
+       name: nagios
+       state: restarted
