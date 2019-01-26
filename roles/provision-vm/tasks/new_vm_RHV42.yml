@@ -72,11 +72,11 @@
   notify: Restart DNS
   delegate_to: "{{ vm_dns }}"
 
-   - name: Clear CMDB list
-     uri:
-        url: "http://10.32.170.153/clear.php"
-        method: GET
-        return_content: no
+- name: Clear CMDB list
+  uri:
+     url: "http://10.32.170.153/clear.php"
+     method: GET
+     return_content: no
 
    #- name: Add "{{ vm_ip }}" to Dynamic inventory
    #  uri:
