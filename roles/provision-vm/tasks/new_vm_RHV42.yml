@@ -1,97 +1,76 @@
 ---
-- hosts: all
-  remote_user: root
-  vars:
-    vm_name: "demo-rhv.labmad.redhat.com"
-    vm_ip: "10.32.170.190"
-    vm_cores: "2"
-    vm_mem: "2048MiB"
-    vm_msk: "255.255.255.0"
-    vm_gw: "10.32.170.254"
-    vm_dns: "10.32.170.50"
-    vm_dns_search: "labmad.redhat.com"
-    compatibility_version: 4.1
-    engine_user: admin@internal
-    engine_url: https://rhhi.labmad.redhat.com/ovirt-engine/api
-    template: CentOS7.5
-    cluster: RHHI-Cluster
+- name: Login to oVirt
+  ovirt_auth:
+    url: "{{ engine_url }}"
+    username: "{{ engine_user }}"
+    password: "{{ engine_password }}"
+    insecure: "{{ engine_insecure | default(true) }}"
 
-  pre_tasks:
-    - name: Login to oVirt
-      ovirt_auth:
-        url: "{{ engine_url }}"
-        username: "{{ engine_user }}"
-        password: "{{ engine_password }}"
-        insecure: "{{ engine_insecure | default(true) }}"
-      tags:
-        - always
-
-  tasks:
-   - name: Creating VM
-     ovirt_vms:
-        auth: "{{ ovirt_auth }}"
-        name: "{{ vm_name }}"
-        state: running
-        template: "{{ template }}"
-        cluster: "{{ cluster }}"
-        memory: "{{ vm_mem }}"
-        cpu_cores: "{{ vm_cores }}"
-        high_availability: false
-        comment: "Enterprise Demo"
-        cloud_init:
-          nic_boot_protocol: static
-          nic_ip_address: "{{ vm_ip }}"
-          nic_netmask: "{{ vm_msk }}"
-          nic_gateway: "{{ vm_gw }}"
-          dns_servers: "{{ vm_dns }}"
-          dns_search: "{{ vm_dns_search }}"
-          nic_name: eth0
-          nic_on_boot: true
-          host_name: "{{ vm_name }}"
-          custom_script: |
-            write_files:
-             - content: |
-                 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDO1YG8hrN5vg8Nvshut0l1D8kvFcBSgNjrwmaJF/QfwjzMImCklr8L0b8cDtr9LFBhVwtQ4CHenpf/fB5b2FsM9GDf5GD62xd2BzmcLcf6Y2uPmpfjXafJ0UvJgchj4kdLDnHpsOQeD5E9y+yQtZCSbQfZcbgfFncJmWIPJ4DSmckYhHXL3bWIRQNIcr2mN75zv+sQXrpnlhyeJFn2CepRlGYTAdm6Fcn2lsHW3kqZCw27Nc9XFCk1kkzuS2/2czGFnd0sMWGCkHpeoQLoCWq55rBngUB/JB/o1OVpxfs4aXb9TJN8PlHxO4llbMyl2tSGA5JXw1rqc35pDvLGHBRj jmn@black.remote.csb
-               path: /root/.ssh/authorized_keys
-               permissions: '0600'
-          user_name: root
-          root_password: "{{ vm_root_pw }}"
+- name: Creating VM
+  ovirt_vms:
+     auth: "{{ ovirt_auth }}"
+     name: "{{ vm_name }}"
+     state: running
+     template: "{{ template }}"
+     cluster: "{{ cluster }}"
+     memory: "{{ vm_mem }}"
+     cpu_cores: "{{ vm_cores }}"
+     high_availability: false
+     comment: "Enterprise Demo"
+     cloud_init:
+       nic_boot_protocol: static
+       nic_ip_address: "{{ vm_ip }}"
+       nic_netmask: "{{ vm_msk }}"
+       nic_gateway: "{{ vm_gw }}"
+       dns_servers: "{{ vm_dns }}"
+       dns_search: "{{ vm_dns_search }}"
+       nic_name: eth0
+       nic_on_boot: true
+       host_name: "{{ vm_name }}"
+       custom_script: |
+         write_files:
+          - content: |
+              ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDO1YG8hrN5vg8Nvshut0l1D8kvFcBSgNjrwmaJF/QfwjzMImCklr8L0b8cDtr9LFBhVwtQ4CHenpf/fB5b2FsM9GDf5GD62xd2BzmcLcf6Y2uPmpfjXafJ0UvJgchj4kdLDnHpsOQeD5E9y+yQtZCSbQfZcbgfFncJmWIPJ4DSmckYhHXL3bWIRQNIcr2mN75zv+sQXrpnlhyeJFn2CepRlGYTAdm6Fcn2lsHW3kqZCw27Nc9XFCk1kkzuS2/2czGFnd0sMWGCkHpeoQLoCWq55rBngUB/JB/o1OVpxfs4aXb9TJN8PlHxO4llbMyl2tSGA5JXw1rqc35pDvLGHBRj jmn@black.remote.csb
+            path: /root/.ssh/authorized_keys
+            permissions: '0600'
+       user_name: root
+       root_password: "{{ vm_root_pw }}"
 
 
-   - name: Wait until new VM be accesible
-     wait_for:
-       host: "{{ vm_ip }}"
-       port: 22
-       delay: 2
+- name: Wait until new VM be accesible
+  wait_for:
+    host: "{{ vm_ip }}"
+    port: 22
+    delay: 2
 
-   - name: Clear OLD nameserver from /etc/resolv.conf
-     lineinfile:
-       path: /etc/resolv.conf
-       regexp: "^nameserver"
-       state: absent
-     delegate_to: "{{ vm_ip }}"
+- name: Clear OLD nameserver from /etc/resolv.conf
+  lineinfile:
+    path: /etc/resolv.conf
+    regexp: "^nameserver"
+    state: absent
+  delegate_to: "{{ vm_ip }}"
 
-   - name: Set unique nameserver in /etc/resolv.conf
-     lineinfile:
-       path: /etc/resolv.conf
-       regexp: "^nameserver"
-       line: "nameserver {{ vm_dns }}"
-       state: present
-     delegate_to: "{{ vm_ip }}"
+- name: Set unique nameserver in /etc/resolv.conf
+  lineinfile:
+    path: /etc/resolv.conf
+    regexp: "^nameserver"
+    line: "nameserver {{ vm_dns }}"
+    state: present
+  delegate_to: "{{ vm_ip }}"
 
-   - name: Set Hostname "{{ vm_name }}"
-     hostname:
-        name: "{{ vm_name }}"
-     delegate_to: "{{ vm_ip }}"
+- name: Set Hostname "{{ vm_name }}"
+  hostname:
+     name: "{{ vm_name }}"
+  delegate_to: "{{ vm_ip }}"
 
-   - name: Name resolution for "{{ vm_name }}"
-     lineinfile:
-        dest=/etc/hosts
-        regexp="^{{ vm_ip }}"
-        line='{{ vm_ip }} {{ vm_name }}'
-        state=present
-     notify: Restart DNS
-     delegate_to: "{{ vm_dns }}"
+- name: Name resolution for "{{ vm_name }}"
+  lineinfile:
+     dest=/etc/hosts
+     regexp="^{{ vm_ip }}"
+     line='{{ vm_ip }} {{ vm_name }}'
+     state=present
+  notify: Restart DNS
+  delegate_to: "{{ vm_dns }}"
 
    - name: Clear CMDB list
      uri:
@@ -105,11 +84,11 @@
    #     method: GET
    #     return_content: no
 
-   - name: Add repository
-     yum_repository:
-       name: epel
-       description: EPEL YUM repo
-       baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+- name: Add repository
+  yum_repository:
+    name: epel
+    description: EPEL YUM repo
+    baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
 
 #   - name: Install remaining packages pre-reqs
 #     yum: update_cache=yes name=ovirt-guest-agent-common state=latest
@@ -117,24 +96,21 @@
 #   - name: Enable ovirt-guest-tools service
 #     systemd: state=started name=ovirt-guest-agent.service
 
-   - name: "[ENTERPRISE-DEMO][AWS][DEPLOY-INSTANCE] Register the specs of the new brand VM"
-     set_stats:
-       data:
-         new_vm_ip: "{{ vm_name  }}"
-       per_host: no
-       aggregate: no
+- name: "[ENTERPRISE-DEMO][AWS][DEPLOY-INSTANCE] Register the specs of the new brand VM"
+  set_stats:
+    data:
+      new_vm_ip: "{{ vm_name  }}"
+    per_host: no
+    aggregate: no
 
-  post_tasks:
-    - name: Logout from oVirt
-      ovirt_auth:
-        state: absent
-        ovirt_auth: "{{ ovirt_auth }}"
-      tags:
-        - always
+- name: Logout from oVirt
+  ovirt_auth:
+    state: absent
+    ovirt_auth: "{{ ovirt_auth }}"
 
-  handlers:
-    - name: Restart DNS
-      systemd: state=restarted name=dnsmasq
-      delegate_to: "{{ vm_dns }}"
+handlers:
+  - name: Restart DNS
+    systemd: state=restarted name=dnsmasq
+    delegate_to: "{{ vm_dns }}"
 
 

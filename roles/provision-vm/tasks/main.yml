@@ -14,7 +14,7 @@
 # Deploy VM in RHV
 - block:
   - include: new_vm_RHV42.yml
-  when: "'{{ cloud_environment }}' == 'RHV'"
+  when: cloud_environment == "RHV"
 
 
 

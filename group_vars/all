@@ -41,3 +41,17 @@ cmbd_ip: "10.32.170.153"
 monitoring: "enable"
 
 
+#### RHV Specs
+vm_name: "demo-rhv.labmad.redhat.com"
+vm_ip: "10.32.170.190"
+vm_cores: "2"
+vm_mem: "2048MiB"
+vm_msk: "255.255.255.0"
+vm_gw: "10.32.170.254"
+vm_dns: "10.32.170.50"
+vm_dns_search: "labmad.redhat.com"
+compatibility_version: 4.1
+engine_user: admin@internal
+engine_url: https://rhhi.labmad.redhat.com/ovirt-engine/api
+template: CentOS7.5
+cluster: RHHI-Cluster
