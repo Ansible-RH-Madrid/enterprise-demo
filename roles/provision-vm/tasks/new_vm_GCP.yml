@@ -1,7 +1,7 @@
 ---
 
 - name: create/delete an instance
-   gce:
+  gce:
     instance_names: "{{ vm_name}}"
     zone: "{{ zone }}"
     machine_type: n1-standard-1
