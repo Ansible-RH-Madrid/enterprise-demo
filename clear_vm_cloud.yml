@@ -1,0 +1,12 @@
+---
+
+- name: "Clean vm in clouds"
+  hosts: all
+  connection: local
+  vars_files:
+    - "vault/aws_vault.yml"
+  tasks:
+    - ec2_instance:
+        state: absent
+        filters:
+          "tag:Name": "{{ ec2_instance_name }}"
