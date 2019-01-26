@@ -6,7 +6,7 @@
     #tokenBot: XXX
     # Chat IDs
     #chatID: YYY
-    telegram_message: "Your VM {{ new_vm_ip }} in {{ cloud_environment }} is provisioned correctly. Your application is running in {{ new_vm_ip }}:{{ http_port }}"
+    #telegram_message: "Your VM {{ new_vm_ip }} in {{ cloud_environment }} is provisioned correctly. Your application is running in {{ new_vm_ip }}:{{ http_port }}"
 
   tasks:
     - name: "[ENTERPRISE-DEMO] Sending message to Telegram private chat/group"
