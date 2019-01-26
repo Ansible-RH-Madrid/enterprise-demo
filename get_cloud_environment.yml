@@ -15,10 +15,12 @@
        region: "{{ ec2_region }}"
      register: instances
 
+   - debug:
+       msg: "{{ instances }}"
+
    - name: "Register the variables"
      set_stats:
        data:
-         new_vm_ip: "{{ item.public_dns_name }}"
+         new_vm_ip: "{{ instances.public_dns_name }}"
        per_host: no
        aggregate: no
-     with_items: "{{ instances }}"
