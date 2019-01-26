@@ -8,5 +8,6 @@
   tasks:
     - ec2_instance:
         state: absent
+        region: "{{ ec2_region }}"
         filters:
           "tag:Name": "{{ ec2_instance_name }}"
