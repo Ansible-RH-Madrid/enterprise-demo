@@ -10,6 +10,7 @@
      ec2_instance_facts:
        filters:
          "tag:Name": "{{ ec2_instance_name }}"
+       region: "{{ ec2_region }}"
      register: instances
 
    - name: "Register the variables"
