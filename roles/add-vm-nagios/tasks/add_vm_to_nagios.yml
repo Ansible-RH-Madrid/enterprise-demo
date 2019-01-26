@@ -27,7 +27,7 @@
               service_description             JBOSS_Ansible_Demo
               check_command                   check_http_with_args!{{ http_port }}!/
               notifications_enabled           0
-              event_handler                   ansible-playbook
+              event_handler                   ansible-playbook-enterprise
               check_interval                  0.5
        }
 
