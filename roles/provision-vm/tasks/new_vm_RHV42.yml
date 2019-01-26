@@ -108,9 +108,8 @@
     state: absent
     ovirt_auth: "{{ ovirt_auth }}"
 
-handlers:
-  - name: Restart DNS
-    systemd: state=restarted name=dnsmasq
-    delegate_to: "{{ vm_dns }}"
+
+
+
 
 

@@ -1,2 +1,6 @@
 ---
 # handlers file for provision_aws
+
+- name: Restart DNS
+  systemd: state=restarted name=dnsmasq
+  delegate_to: "{{ vm_dns }}"
