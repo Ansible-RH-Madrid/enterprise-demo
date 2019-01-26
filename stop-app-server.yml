@@ -1,0 +1,10 @@
+---
+
+- name: "Get information about the cloud"
+  hosts: all
+  tasks:
+   - name: "Stopping app-server..."
+     service:
+       name: tomcat
+       state: stopped
+

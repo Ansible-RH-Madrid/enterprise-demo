@@ -27,7 +27,7 @@
     msg: "{{ item }}"
   with_items: "{{ ec2.instances }}"
 
-- name: "[ENTERPRISE-DEMO][AWS][DEPLOY-INSTANCE] Wait for SSH to come up"
+- name: "[ENTERPRISE-DEMO][AWS][DEPLOY-INSTANCE] Register the specs of the new brand VM"
   set_stats:
     data:
       new_vm_ip: "{{ item.public_dns_name }}"
