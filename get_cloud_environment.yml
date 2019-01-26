@@ -6,28 +6,18 @@
   vars_files:
     - "vault/aws_vault.yml"
   tasks:
- #   - name: "Get facts about instance in ec2"
- #     ec2_instance_facts:
- #       access_key: "{{ ec2_access_key }}"
- #       secret_key: "{{ ec2_secret_key }}"
- #       filters:
- #         "tag:Name": "{{ ec2_instance_name }}"
- #       region: "{{ ec2_region }}"
- #     register: vms
+   - name: "Get facts about instance in ec2"
+     ec2_instance_facts:
+       access_key: "{{ ec2_access_key }}"
+       secret_key: "{{ ec2_secret_key }}"
+       filters:
+         "tag:Name": "{{ ec2_instance_name }}"
+       region: "{{ ec2_region }}"
+     register: vms
 
-   - ec2:
-      access_key: "{{ ec2_access_key }}"
-      secret_key: "{{ ec2_secret_key }}"
-      group: "{{ ec2_security_group }}"
-      region: "{{ ec2_region }}"
-      instance_tags: "{'ansible_group':'jboss', 'type':'{{ ec2_instance_type }}', 'group':'{{ ec2_security_group }}', 'Name':'{{ ec2_instance_name }}'}"
-      state: present
-      wait: true
-    register: ec2
-
-   - debug:
-       msg: "{{ item }}"
-     with_items: "{{ ec2.instances }}"
+#   - debug:
+#       msg: "{{ item }}"
+#     with_items: "{{ vms.instances }}"
 
    - name: "Register the variables"
      set_stats:
@@ -35,7 +25,7 @@
          new_vm_ip: "{{ item.public_dns_name }}"
        per_host: no
        aggregate: no
-     with_items: "{{ ec2.instances }}"
+     with_items: "{{ vms.instances }}"
 
 
 
