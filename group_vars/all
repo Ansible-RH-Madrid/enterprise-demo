@@ -38,6 +38,6 @@ chatID: -309849244	# Ansible Demo Group
 cmbd_ip: "10.32.170.153"
 
 #### Monitoring
-monitoring: ""
+monitoring: "enable"
 
 
