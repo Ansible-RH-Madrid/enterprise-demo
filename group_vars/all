@@ -63,5 +63,4 @@ serviceAcc_mail:
 image: 'rhel-7'
 zone: "europe-west1-b"
 disk_size_gb: 10
-vm_name: 'test-vm'
 instance_state: "present"
