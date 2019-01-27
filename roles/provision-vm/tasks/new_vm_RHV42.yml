@@ -99,7 +99,7 @@
 - name: "[ENTERPRISE-DEMO][AWS][DEPLOY-INSTANCE] Register the specs of the new brand VM"
   set_stats:
     data:
-      new_vm_ip: "{{ vm_name  }}"
+      new_vm_ip: "{{ vm_ip  }}"
     per_host: no
     aggregate: no
 
