@@ -1,0 +1,10 @@
+---
+
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][CONFIG-APP-SERVER] Configure APP-SERVER in the ec2 server"
+  hosts: all
+  #remote_user: "{{ ec2_remote_user }}"
+  become: yes
+  roles:
+    - { role: tomcat-selinux }
+    - { role: tomcat-standalone }
+    #- { role: java-app }

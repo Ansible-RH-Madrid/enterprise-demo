@@ -4,11 +4,11 @@
     name: java-1.7.0-openjdk
     state: present
 
-- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Add group tomcat"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Add group jboss"
   group:
     name: tomcat
 
-- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Add user tomcat"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Add user jboss"
   user:
     name: "tomcat"
     group: "tomcat"
@@ -17,7 +17,7 @@
   become: True
   become_method: sudo
 
-- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Download Tomcat"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Download JBOSS standalone"
   get_url:
     url: "http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.61/bin/apache-tomcat-7.0.61.tar.gz"
     dest: "/opt/apache-tomcat-7.0.61.tar.gz"
@@ -31,7 +31,7 @@
     path: "/usr/share/tomcat"
     state: link
 
-- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Change ownership of Tomcat installation"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Change ownership of JBOSS installation"
   file:
     path: "/usr/share/tomcat/"
     owner: tomcat
@@ -39,31 +39,31 @@
     state: directory
     recurse: yes
 
-- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Configure Tomcat server"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Configure JBOSS server"
   template:
     src: "server.xml"
     dest: "/usr/share/tomcat/conf/"
   notify: restart tomcat
 
-- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Configure Tomcat users"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Configure JBOSS users"
   template:
     src: "tomcat-users.xml"
     dest: "/usr/share/tomcat/conf/"
   notify: restart tomcat
 
-- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Install Tomcat init script"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Install JBOSS init script"
   copy:
     src: "tomcat-initscript.sh"
     dest: "/etc/init.d/tomcat"
     mode: 0755
 
-- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Start Tomcat"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Start JBOSS"
   service:
     name: tomcat
     state: started
     enabled: yes
 
-- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Wait for tomcat to start"
+- name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Wait for JBOSS to start"
   wait_for:
     port: "{{http_port}}"
 
