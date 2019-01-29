@@ -22,7 +22,7 @@
    - name: "Register the variables"
      set_stats:
        data:
-         new_vm_ips: "{{ item.public_dns_name }}"
+         new_vm_ip: "{{ item.public_dns_name }}"
        per_host: no
        aggregate: no
      with_items: "{{ vms.instances }}"
