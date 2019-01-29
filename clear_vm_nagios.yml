@@ -7,7 +7,7 @@
 
    - name: "Delete configuration file (server_id.cfg) for the server"
      delegate_to: 10.32.170.152
-     shell: rm -f /etc/nagios/servers/{{ new_vm_ip }}.cfg
+     shell: rm -f /etc/nagios/servers/{{ new_vm_ips }}.cfg
 
    - name: "Restart nagios service"
      delegate_to: 10.32.170.152
