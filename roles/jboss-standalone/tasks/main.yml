@@ -58,6 +58,8 @@
     mode: 0755
 
 - name: "[ENTERPRISE-DEMO][{{ cloud_environment }}][DEPLOY-SERVER-APP] Start JBOSS"
+  args:
+      warn: false
   service:
     name: tomcat
     state: started
