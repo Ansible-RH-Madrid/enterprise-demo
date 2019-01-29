@@ -5,6 +5,6 @@
   #remote_user: "{{ ec2_remote_user }}"
   become: yes
   roles:
-    - { role: tomcat-selinux }
-    - { role: tomcat-standalone }
+    - { role: jboss-selinux }
+    - { role: jboss-standalone }
     #- { role: java-app }
